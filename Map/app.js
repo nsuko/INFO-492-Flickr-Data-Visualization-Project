@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Initialize the map with a zoom level appropriate for the entire U.S.
-    var map = L.map('map').setView([37.0902, -95.7129], 4);  // Centered on the US, zoom level 4
+    var map = L.map('map').setView([37, -96], 4);  // Centered on the US, zoom level 4
 
     // Add tile layer (OpenStreetMap)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -32,26 +32,44 @@ document.addEventListener("DOMContentLoaded", function() {
             data.forEach(function(photo) {
                 var lat = parseFloat(photo.latitude);
                 var lon = parseFloat(photo.longitude);
-
+            
                 // Check if photo is inside the current map bounds
                 if (bounds.contains([lat, lon])) {
                     // Add the photo to the visible photos array
                     visiblePhotos.push(photo);
-
+            
                     // Create a custom marker icon with the thumbnail
-                    var icon = L.icon({
-                        iconUrl: photo.url_s,  // URL of the thumbnail image
-                        iconSize: [50, 50],  // Size of the icon (adjust as needed)
-                        iconAnchor: [25, 25],  // Point where the icon is anchored (centered)
-                        popupAnchor: [0, -25]  // Where the popup appears (optional)
-                    });
+// Create a custom marker icon with a circular thumbnail
+var icon = L.divIcon({
+    html: `<div style="width: 50px; height: 50px; background-image: url('${photo.url_s}'); background-size: cover; background-position: center; border-radius: 50%; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);"></div>`,
+    className: "custom-div-icon",  // Unique class to ensure custom styling is applied
+    iconSize: [50, 50],  // Size of the icon
+    iconAnchor: [25, 25]  // Center the icon
+});
+
+// Create the marker with the custom div icon
+var marker = L.marker([lat, lon], { icon: icon });
 
                     // Create the marker with the custom icon
                     var marker = L.marker([lat, lon], { icon: icon });
-
-                    // Bind a popup with the title (optional)
-                    marker.bindPopup("<b>" + photo.title + "</b>");
-
+            
+                    const photoTitle = photo.title;
+                    const ownerName = photo.ownername;
+                    const imageUrl = photo.url_s;
+                    const photoId = photo.id; // Photo ID
+                    const userId = photo.user_id; // User ID
+            
+                    // Generate the link to the photo on Flickr
+                    // const flickrLink = `https://www.flickr.com/photos/${userId}/${photoId}`;
+            
+                    // Customize the popup content to display title, owner name, and the "View on Flickr" link
+                    const popupContent = `
+                        <div><img src="${imageUrl}" alt="Photo" style="width: 100px; height: auto;"></div>
+                        <div><strong>${photoTitle}</strong><br>from ${ownerName}<br>
+                    `;
+            
+                    marker.bindPopup(popupContent);  // Attach the popup to the marker
+            
                     // Add the marker to the cluster group
                     markers.addLayer(marker);
                 }
