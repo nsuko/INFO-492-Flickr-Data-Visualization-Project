@@ -3,28 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flickr Photo Map</title>
-    <link rel="stylesheet" href="styles.css">
-
-    <!-- Leaflet CSS -->
+    <title>Flickr Map</title>
+    <!-- Add these CSS files -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-
-    <link rel="stylesheet" href="styles.css">
-    <!-- Leaflet MarkerCluster CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
-
-    <!-- Leaflet JS and MarkerCluster JS -->
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
-
-    <!-- D3 library for CSV loading -->
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="map" style="width: 100%; height: 600px;"></div>
+    <div id="map-container">
+        <div id="map"></div>
+        <div id="photo-container"></div>
+    </div>
 
-    <!-- Link to your custom JavaScript file after the D3 library -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
