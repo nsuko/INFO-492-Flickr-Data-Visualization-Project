@@ -1,89 +1,50 @@
-// Ensure D3 library is included in your HTML to use d3.csv for loading CSV data
-// <script src="https://d3js.org/d3.v7.min.js"></script>
+// Initialize the map with a zoom level appropriate for the entire U.S.
+var map = L.map('map').setView([37.0902, -95.7129], 4);  // Centered on the US, zoom level 4
 
-// Initialize the map
-var map = L.map('map').setView([37.8, -96], 4);
-
-// Add a tile layer to the map (using OpenStreetMap as an example)
+// Add tile layer (OpenStreetMap)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 18,
-    attribution: '© OpenStreetMap contributors'
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-// Minimum zoom level to display individual photo thumbnails
-const minZoomForPhotos = 8;
+// Add cluster group to hold the markers
+var markers = L.markerClusterGroup();
 
-// Create a marker cluster group with custom styling
-var markers = L.markerClusterGroup({
-    iconCreateFunction: function(cluster) {
-        var count = cluster.getChildCount();
-        var size = 'marker-cluster-small';
-        if (count >= 100) {
-            size = 'marker-cluster-large';
-        } else if (count >= 50) {
-            size = 'marker-cluster-medium';
-        }
-        return L.divIcon({
-            html: `<span>${count}</span>`,
-            className: `marker-cluster ${size}`,
-            iconSize: L.point(40, 40)
+// Function to load and display photos based on the visible bounds
+function loadPhotos() {
+    // Get the current map bounds
+    var bounds = map.getBounds();
+
+    // Clear existing markers
+    markers.clearLayers();
+
+    // Filter photos based on bounds (latitude and longitude)
+    d3.csv("data.csv").then(function(data) {
+        data.forEach(function(photo) {
+            var lat = parseFloat(photo.latitude);
+            var lon = parseFloat(photo.longitude);
+
+            // Check if photo is inside the current map bounds
+            if (bounds.contains([lat, lon])) {
+                // Create a marker for the photo's location
+                var marker = L.marker([lat, lon]);
+
+                // Bind a popup with the thumbnail image
+                marker.bindPopup("<img src='" + photo.url_s + "' alt='" + photo.title + "' width='100px'>");
+
+                // Add the marker to the cluster group
+                markers.addLayer(marker);
+            }
         });
-    }
-});
 
-// Function to create an individual photo marker
-function createPhotoMarker(photo) {
-    return L.marker([photo.latitude, photo.longitude], {
-        icon: L.divIcon({
-            html: `<img src="${photo.url_s}" alt="${photo.title}" class="photo-marker">`,
-            className: 'photo-marker-icon',
-            iconSize: [50, 50]
-        })
+        // Add the markers to the map
+        map.addLayer(markers);
     });
 }
 
-// Load the data from the CSV file using D3
-d3.csv("data.csv").then(data => {
-    // Process data and create markers
-    data.forEach(photo => {
-        const latitude = parseFloat(photo.latitude);
-        const longitude = parseFloat(photo.longitude);
+// Load photos when the map is first loaded
+loadPhotos();
 
-        if (map.getZoom() >= minZoomForPhotos) {
-            // When zoomed in, create photo markers directly on the map
-            const photoMarker = createPhotoMarker(photo);
-            photoMarker.addTo(map);
-        } else {
-            // Otherwise, create regular markers for clustering
-            const marker = L.marker([latitude, longitude]);
-            markers.addLayer(marker);
-        }
-    });
-
-    // Add the cluster markers to the map
-    map.addLayer(markers);
-
-    // Update markers on zoom change
-    map.on('zoomend', function() {
-        if (map.getZoom() >= minZoomForPhotos) {
-            markers.clearLayers(); // Clear cluster markers
-            data.forEach(photo => {
-                const photoMarker = createPhotoMarker(photo);
-                photoMarker.addTo(map); // Add photo marker directly to map
-            });
-        } else {
-            map.eachLayer(layer => {
-                if (layer.options && layer.options.icon && layer.options.icon.options.className === 'photo-marker-icon') {
-                    map.removeLayer(layer); // Remove individual photo markers when zoomed out
-                }
-            });
-            data.forEach(photo => {
-                const marker = L.marker([parseFloat(photo.latitude), parseFloat(photo.longitude)]);
-                markers.addLayer(marker); // Add regular marker to clusters
-            });
-            map.addLayer(markers);
-        }
-    });
-}).catch(error => {
-    console.error("Error loading or parsing CSV:", error);
+// Reload photos when the map is moved or zoomed
+map.on('moveend', function() {
+    loadPhotos();
 });
