@@ -25,11 +25,19 @@ function loadPhotos() {
 
             // Check if photo is inside the current map bounds
             if (bounds.contains([lat, lon])) {
-                // Create a marker for the photo's location
-                var marker = L.marker([lat, lon]);
+                // Create a custom marker icon with the thumbnail
+                var icon = L.icon({
+                    iconUrl: photo.url_s,  // URL of the thumbnail image
+                    iconSize: [50, 50],  // Size of the icon (adjust as needed)
+                    iconAnchor: [25, 25],  // Point where the icon is anchored (centered)
+                    popupAnchor: [0, -25]  // Where the popup appears (optional)
+                });
 
-                // Bind a popup with the thumbnail image
-                marker.bindPopup("<img src='" + photo.url_s + "' alt='" + photo.title + "' width='100px'>");
+                // Create the marker with the custom icon
+                var marker = L.marker([lat, lon], { icon: icon });
+
+                // Bind a popup with the title (optional)
+                marker.bindPopup("<b>" + photo.title + "</b>");
 
                 // Add the marker to the cluster group
                 markers.addLayer(marker);
