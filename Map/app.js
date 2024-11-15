@@ -8,7 +8,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }).addTo(map);
 
     // Add cluster group to hold the markers
-    var markers = L.markerClusterGroup();
+// Add cluster group to hold the markers
+var markers = L.markerClusterGroup({
+    disableClusteringAtZoom: 8  // Disable clustering at zoom level 16 and beyond
+});
 
     // Create the container to display photos below the map
     var photoContainer = document.getElementById("photo-container");
