@@ -7,7 +7,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }).addTo(map);
 
     // Add cluster group to hold the markers
-    var markers = L.markerClusterGroup();
+    var markers = L.markerClusterGroup({
+        disableClusteringAtZoom: 10 // This will prevent clustering at zoom level 10 and higher
+    });
+    map.addLayer(markers);
 
     // Create the container to display photos below the map
     var photoContainer = document.getElementById("photo-container");
@@ -22,44 +25,44 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Clear existing markers and the photo container
         markers.clearLayers();
-        photoContainer.innerHTML = '';  // Clear the gallery
 
         // Filter photos based on bounds (latitude and longitude)
         d3.csv("data.csv").then(function(data) {
             visiblePhotos = [];  // Clear previous photos
 
+            // Loop through each photo in the data
             data.forEach(function(photo) {
                 var lat = parseFloat(photo.latitude);
                 var lon = parseFloat(photo.longitude);
-            
+
                 // Check if photo is inside the current map bounds
                 if (bounds.contains([lat, lon])) {
                     // Add the photo to the visible photos array
                     visiblePhotos.push(photo);
-            
+
                     // Create a custom marker icon with the thumbnail
-                    var icon = L.icon({
-                        iconUrl: photo.url_s,
-                        iconSize: [50, 50],
-                        iconAnchor: [25, 25],
-                        popupAnchor: [0, -25]
+                    var icon = L.divIcon({
+                        html: `<div class="circular-marker" style="background-image: url('${photo.url_s}');"></div>`,
+                        className: "",  // Clear default class to avoid unwanted styles
+                        iconSize: [50, 50],  // Size of the icon (adjust as needed)
+                        iconAnchor: [25, 25]  // Center the icon
                     });
-            
+
                     // Create the marker with the custom icon
                     var marker = L.marker([lat, lon], { icon: icon });
-            
+
                     // Customize the popup content
                     const photoTitle = photo.title;
                     const ownerName = photo.ownername;
                     const imageUrl = photo.url_s;
-            
+
                     const popupContent = `
                         <div><img src="${imageUrl}" alt="Photo" style="width: 100px; height: auto;"></div>
                         <div><strong>${photoTitle}</strong><br>from ${ownerName}<br>
                     `;
-            
+
                     marker.bindPopup(popupContent);
-            
+
                     // Add the marker to the cluster group
                     markers.addLayer(marker);
                 }
@@ -84,15 +87,38 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Function to display photos below the map
     function displayVisiblePhotos() {
+        // Clear the existing thumbnails
+        photoContainer.innerHTML = '';
+
         // Show up to 80 photos in the photo container
-        var photosToDisplay = visiblePhotos.slice(0, 80);
+        var photosToDisplay = visiblePhotos.slice(0, 80);  // Limit to 80 photos
 
         photosToDisplay.forEach(function(photo) {
+            var photoWrapper = document.createElement("div");
+            photoWrapper.className = "photo-wrapper";
+
+            // Create the image element
             var img = document.createElement("img");
             img.src = photo.url_s;
             img.alt = photo.title;
             img.className = "photo-thumbnail";
-            photoContainer.appendChild(img);
+
+            // Create the caption div
+            var caption = document.createElement("div");
+            caption.className = "photo-caption";
+
+            // Limit the title length to 20 characters and add "..." if needed
+            var limitedTitle = photo.title.length > 20 ? photo.title.substring(0, 20) + "..." : photo.title;
+
+            // Set the caption with title and owner name
+            caption.innerHTML = `${limitedTitle}<br>from ${photo.ownername}`;
+
+            // Append the image and caption to the wrapper
+            photoWrapper.appendChild(img);
+            photoWrapper.appendChild(caption);
+
+            // Append the wrapper to the photo container
+            photoContainer.appendChild(photoWrapper);
         });
     }
 
@@ -106,15 +132,37 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Function to load more photos on scroll
     function loadMorePhotos() {
-        var photosToDisplay = visiblePhotos.slice(currentIndex, currentIndex + 20);
+        var photosToDisplay = visiblePhotos.slice(currentIndex, currentIndex + 20);  // Load 20 photos
+
         photosToDisplay.forEach(function(photo) {
+            var photoWrapper = document.createElement("div");
+            photoWrapper.className = "photo-wrapper";
+
+            // Create the image element
             var img = document.createElement("img");
             img.src = photo.url_s;
             img.alt = photo.title;
             img.className = "photo-thumbnail";
-            photoContainer.appendChild(img);
+
+            // Create the caption div
+            var caption = document.createElement("div");
+            caption.className = "photo-caption";
+
+            // Limit the title length to 20 characters and add "..." if needed
+            var limitedTitle = photo.title.length > 20 ? photo.title.substring(0, 20) + "..." : photo.title;
+
+            // Set the caption with title and owner name
+            caption.innerHTML = `${limitedTitle}<br>from ${photo.ownername}`;
+
+            // Append the image and caption to the wrapper
+            photoWrapper.appendChild(img);
+            photoWrapper.appendChild(caption);
+
+            // Append the wrapper to the photo container
+            photoContainer.appendChild(photoWrapper);
         });
 
+        // Update the currentIndex to reflect the next set of photos
         currentIndex += 20;
     }
 
