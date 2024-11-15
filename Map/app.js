@@ -55,13 +55,27 @@ document.addEventListener("DOMContentLoaded", function() {
                     const photoTitle = photo.title;
                     const ownerName = photo.ownername;
                     const imageUrl = photo.url_s;
+                    const dateUploaded = photo.dateupload ? new Date(photo.dateupload * 1000).toLocaleDateString() : "No date available"; // Assuming dateupload is a UNIX timestamp
 
                     const popupContent = `
-                        <div><img src="${imageUrl}" alt="Photo" style="width: 100px; height: auto;"></div>
-                        <div><strong>${photoTitle}</strong><br>from ${ownerName}<br>
-                    `;
-
-                    marker.bindPopup(popupContent);
+                    <div class="popup-content">
+                        <div class="popup-image">
+                            <img src="${imageUrl}" alt="Photo">
+                        </div>
+                        <div class="popup-caption">
+                            <strong>${photoTitle}</strong><br>
+                            from ${ownerName}<br>
+                            <strong>Date:</strong> ${dateUploaded}<br>
+                        </div>
+                    </div>
+                `;
+                
+                marker.bindPopup(popupContent, {
+                    maxWidth: 400,  // Adjust max width of the popup
+                    maxHeight: 600, // Adjust max height of the popup
+                    className: 'custom-popup' // Optional: custom class for further styling
+                });
+                
 
                     // Add the marker to the cluster group
                     markers.addLayer(marker);

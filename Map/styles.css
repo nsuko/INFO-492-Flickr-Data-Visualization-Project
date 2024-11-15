@@ -15,23 +15,20 @@ body {
     margin-bottom: 2%;
 }
 
-/* Make the map container occupy 60% of the screen width */
 #map {
-    width: 90%;  /* Map takes up 60% of the page width */
+    width: 80%; 
     margin: 0 auto;  /* Center the map horizontally */
-    height: 800px; /* Set a fixed height for the map (adjust as needed) */
-    border-radius: 8px; /* Optional: for rounded corners */
+    height: 800px; /* Set a fixed height for the map */
+    border-radius: 8px; /* rounded corners */
 }
 
-/* Styling for the photo gallery container */
-#photo-container {
-    height: 25%; /* Photo gallery takes up 30% of the height */
-    width: 100%; /* Full width of the container */
-    overflow-y: auto; /* Make the gallery scrollable */
-    display: flex;
-    flex-wrap: wrap;   /* Allow thumbnails to wrap within the container */
-    justify-content: center;
-    padding: 10px;
+/* Styling for the photo thumbnails */
+#photo-container img {
+    width: 200px;
+    height: 160px;
+    margin: 5px;
+    object-fit: cover;
+    cursor: pointer;
 }
 
 /* Style the photo count caption */
@@ -44,14 +41,6 @@ body {
     margin-bottom: 16px;
 }
 
-/* Styling for the photo thumbnails */
-#photo-container img {
-    width: 200px;
-    height: 160px;
-    margin: 5px;
-    object-fit: cover;
-    cursor: pointer;
-}
 
 .circular-marker {
     width: 50px;
@@ -93,4 +82,47 @@ body {
     color: #333;
     line-height: 1.2em;
     text-align: center;
+}
+
+/* Increase the size of the popup */
+.leaflet-popup-content-wrapper {
+    width: 300px; /* Adjust width as needed */
+    height: auto; /* Let the height adjust based on the content */
+}
+
+/* Optional: Make the image inside the popup larger */
+.leaflet-popup-content img {
+    max-width: 150%;  /* Ensure the image scales properly */
+    height: 300px;
+    max-height: 400px;  /* You can adjust this to control image size */
+}
+
+/* Optional: Increase padding or margins for better spacing */
+.leaflet-popup-content {
+    padding: 7px;  /* Adjust for larger padding inside the popup */
+}
+
+/* Optional: Change the arrow size to match the larger popup */
+.leaflet-popup-tip {
+    width: 20px;  /* Increase the size of the popup arrow */
+    height: 20px;
+}
+
+/* Flex container for the image and caption */
+.popup-content {
+    display: flex;  /* Flexbox layout for side-by-side alignment */
+    align-items: center; /* Vertically align items to the center */
+}
+
+/* Style for the image inside the popup */
+.popup-image img {
+    width: 100px;  /* Set the image width */
+    height: auto;  /* Maintain the aspect ratio */
+    margin-right: 10px;  /* Space between the image and caption */
+}
+
+/* Style for the caption */
+.popup-caption {
+    font-size: 12px;  /* Adjust font size as needed */
+    line-height: 1.4em;
 }
