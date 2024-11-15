@@ -87,44 +87,68 @@ var marker = L.marker([lat, lon], { icon: icon });
     }
 
     // Function to display photos below the map
-    function displayVisiblePhotos() {
-        // Show up to 100 photos in the photo container
-        var photosToDisplay = visiblePhotos.slice(0, 100);
+// Function to display photos below the map
+// Function to display photos below the map
+function displayVisiblePhotos() {
+    // Show up to 100 photos in the photo container
+    var photosToDisplay = visiblePhotos.slice(0, 100);
 
-        // Append each photo as an image thumbnail in the container
-        photosToDisplay.forEach(function(photo) {
-            var img = document.createElement("img");
-            img.src = photo.url_s;  // Use the thumbnail image URL
-            img.alt = photo.title;
-            img.className = "photo-thumbnail";  // Apply a class for styling
-            photoContainer.appendChild(img);
-        });
-    }
+    photosToDisplay.forEach(function(photo) {
+        // Create a container for each photo and its caption
+        var photoWrapper = document.createElement("div");
+        photoWrapper.className = "photo-wrapper";
 
-    // Lazy load more photos as the user scrolls
-    var currentIndex = 100;
-    photoContainer.addEventListener("scroll", function() {
-        if (photoContainer.scrollTop + photoContainer.clientHeight >= photoContainer.scrollHeight) {
-            // Load the next set of photos if the user has scrolled to the bottom
-            loadMorePhotos();
-        }
+        // Create the image element
+        var img = document.createElement("img");
+        img.src = photo.url_s;
+        img.alt = photo.title;
+        img.className = "photo-thumbnail";
+
+        // Create the caption element
+        var caption = document.createElement("div");
+        caption.className = "photo-caption";
+
+        // Limit title to 20 characters, add ellipsis if longer
+        var limitedTitle = photo.title.length > 20 ? photo.title.substring(0, 20) + "..." : photo.title;
+        caption.innerHTML = `${limitedTitle}<br>from ${photo.ownername}`;
+
+        // Append the image and caption to the wrapper
+        photoWrapper.appendChild(img);
+        photoWrapper.appendChild(caption);
+
+        // Append the wrapper to the photo container
+        photoContainer.appendChild(photoWrapper);
+    });
+}
+
+// Function to load more photos on scroll
+function loadMorePhotos() {
+    var photosToDisplay = visiblePhotos.slice(currentIndex, currentIndex + 100);
+
+    photosToDisplay.forEach(function(photo) {
+        var photoWrapper = document.createElement("div");
+        photoWrapper.className = "photo-wrapper";
+
+        var img = document.createElement("img");
+        img.src = photo.url_s;
+        img.alt = photo.title;
+        img.className = "photo-thumbnail";
+
+        var caption = document.createElement("div");
+        caption.className = "photo-caption";
+
+        var limitedTitle = photo.title.length > 20 ? photo.title.substring(0, 20) + "..." : photo.title;
+        caption.innerHTML = `${limitedTitle}<br>from ${photo.ownername}`;
+
+        photoWrapper.appendChild(img);
+        photoWrapper.appendChild(caption);
+        photoContainer.appendChild(photoWrapper);
     });
 
-    // Function to load more photos on scroll
-    function loadMorePhotos() {
-        // Show up to the next 100 photos
-        var photosToDisplay = visiblePhotos.slice(currentIndex, currentIndex + 100);
+    currentIndex += 100;
+}
 
-        photosToDisplay.forEach(function(photo) {
-            var img = document.createElement("img");
-            img.src = photo.url_s;  // Use the thumbnail image URL
-            img.alt = photo.title;
-            img.className = "photo-thumbnail";  // Apply a class for styling
-            photoContainer.appendChild(img);
-        });
 
-        currentIndex += 100;
-    }
 
     // Load photos when the map is first loaded
     loadPhotos();
