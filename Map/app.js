@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
         markers.clearLayers();
 
         // Filter photos based on bounds (latitude and longitude)
-        d3.csv("data.csv").then(function(data) {
+        d3.csv("flickr_metadata_yearly_17000.csv").then(function(data) {
             visiblePhotos = [];  // Clear previous photos
 
             // Loop through each photo in the data
