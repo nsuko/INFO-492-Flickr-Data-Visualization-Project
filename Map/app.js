@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
         markers.clearLayers();
 
         // Filter photos based on bounds (latitude and longitude)
-        d3.csv("flickr_metadata_yearly_17000.csv").then(function(data) {
+        d3.csv("flickr_photos_metadata_yearly.csv").then(function(data) {
             visiblePhotos = [];  // Clear previous photos
 
             // Loop through each photo in the data
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     const ownerName = photo.ownername;
                     const imageUrl = photo.url_s;
                     const dateUploaded = photo.dateupload ? new Date(photo.dateupload * 1000).toLocaleDateString() : "No date available"; // Assuming dateupload is a UNIX timestamp
-
+                    const flickrUrl = `https://www.flickr.com/photos/${photo.owner}/${photo.id}/in/commons`;
                     const popupContent = `
                     <div class="popup-content">
                         <div class="popup-image">
@@ -66,6 +66,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             <strong>${photoTitle}</strong><br>
                             from ${ownerName}<br>
                             <strong>Date:</strong> ${dateUploaded}<br>
+                            <a href=${flickrUrl} target="_blank"><strong>Original Page</strong><a> <br>
                         </div>
                     </div>
                 `;
@@ -127,9 +128,16 @@ document.addEventListener("DOMContentLoaded", function() {
             // Set the caption with title and owner name
             caption.innerHTML = `${limitedTitle}<br>from ${photo.ownername}`;
 
-            // Append the image and caption to the wrapper
+            // Set the url to the original Flickr image page
+            var link = document.createElement("a");
+            link.href = `https://www.flickr.com/photos/${photo.owner}/${photo.id}/in/commons`;
+            link.className = "photo-caption";
+            link.textContent = "Original Page";
+
+            // Append the image, caption, and url to the wrapper
             photoWrapper.appendChild(img);
             photoWrapper.appendChild(caption);
+            photoWrapper.appendChild(link);
 
             // Append the wrapper to the photo container
             photoContainer.appendChild(photoWrapper);
@@ -168,9 +176,16 @@ document.addEventListener("DOMContentLoaded", function() {
             // Set the caption with title and owner name
             caption.innerHTML = `${limitedTitle}<br>from ${photo.ownername}`;
 
+            // Set the url to the original Flickr image page
+            var link = document.createElement("a");
+            link.href = `https://www.flickr.com/photos/${photo.owner}/${photo.id}/in/commons`;
+            link.className = "photo-caption";
+            link.textContent = "Original Page";
+
             // Append the image and caption to the wrapper
             photoWrapper.appendChild(img);
             photoWrapper.appendChild(caption);
+            photoWrapper.appendChild(link);
 
             // Append the wrapper to the photo container
             photoContainer.appendChild(photoWrapper);
