@@ -12,6 +12,18 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     map.addLayer(markers);
 
+        // Adds search ability for places
+        const search = new GeoSearch.GeoSearchControl({
+            provider: new GeoSearch.OpenStreetMapProvider(),
+            position: 'top',
+                style: 'bar',
+        });
+        map.addControl(search);
+
+    map.on('geosearch/showlocation', loadPhotos());
+
+    map.on('geosearch/marker/dragend', loadPhotos());
+    
     // Create the container to display photos below the map
     var photoContainer = document.getElementById("photo-container");
     var photoCount = document.getElementById("photo-count");  // Get the photo count container
