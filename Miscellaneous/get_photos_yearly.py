@@ -82,7 +82,7 @@ for year in range(2008, 2025):
 
 <<<<<<< Updated upstream
 # Convert data into a pandas DataFrame with selected columns
-data = pd.DataFrame(all_photos).loc[:, ['id', 'title', 'longitude', 'latitude', 'datetaken', 'dateupload', 'tags', 'url_s', 'license', 'ownername']]
+data = pd.DataFrame(all_photos).loc[:, ['id', 'owner', 'title', 'longitude', 'latitude', 'datetaken', 'dateupload', 'tags', 'url_s', 'license', 'ownername']]
 
 # Export the DataFrame to a CSV file
 data.to_csv('flickr_photos_metadata_yearly.csv', index=False)
