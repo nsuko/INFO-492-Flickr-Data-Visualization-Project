@@ -1,13 +1,16 @@
+/* General styles */
 body {
     background-color: white;  
     font-family: Calibri, sans-serif;
     margin: 0;  
     padding: 0;  
 }
+
+/* Navbar styles */
 .navbar {
     background-color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 10px 20px;
+    padding: 10px 150px;
     display: flex;
     align-items: center;
     justify-content: space-between; 
@@ -39,24 +42,18 @@ body {
     align-items: center; 
 }
 
+/* Navbar link styles */
+.navbar-right a {
+    font-family: 'Calibri', sans-serif;  
+    font-weight: bold;  
+    font-size: 1.2em;  
+    text-decoration: none;  
+    color: #333;  
+    transition: color 0.3s ease;  
+}
+
 .navbar-right a:hover {
     color: #0063dc; 
-}
-
-.search-bar {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 5px 10px;
-    font-size: 1em;
-    width: 200px; 
-    transition: box-shadow 0.3s ease;
-    margin-right: 15px; 
-}
-
-.search-bar:focus {
-    outline: none;
-    border-color: #0063dc; 
-    box-shadow: 0 0 5px rgba(0, 99, 220, 0.5);
 }
 
 /* Intro box styles */
@@ -70,30 +67,55 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
-#intro-box h2 {
-    font-size: 1.5em;
-    color: #333; 
-    margin-bottom: 10px;
+#intro-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-#intro-box p {
+#intro-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333; 
+}
+
+#toggle-intro {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    outline: none;
+    color: #555; 
+    transition: transform 0.3s ease;
+}
+
+#toggle-intro:hover {
+    color: #0063dc;
+}
+
+#intro-content {
+    margin-top: 10px;
+    display: block; /* Default state: visible */
+}
+
+#intro-content p {
     font-size: 1em;
     color: #555; 
     line-height: 1.6;
 }
 
-#intro-box ul {
+#intro-content ul {
     margin-top: 10px;
-    padding-left: 20px; /
+    padding-left: 20px;
 }
 
-#intro-box li {
+#intro-content li {
     font-size: 1em;
     color: #444; 
     margin-bottom: 5px;
 }
 
-/* Set up the overall container as a flexbox layout */
+/* Map container styles */
 #map-container {
     display: flex;
     flex-direction: column; 
@@ -120,6 +142,36 @@ body {
     cursor: pointer;
 }
 
+#photo-container {
+    padding: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; /* Add spacing between images */
+    justify-content: center;
+}
+
+.photo-wrapper {
+    display: inline-block;
+    margin: 10px;
+    text-align: center;
+}
+
+.photo-thumbnail {
+    display: block;
+    width: 200px; /* Adjust the size */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* rounded corners */
+}
+
+.photo-caption {
+    font-family: 'Calibri', sans-serif;
+    margin-top: 8px;
+    font-size: 1em;
+    color: #333;
+    line-height: 1.2em;
+    text-align: center;
+}
+
 /* Style the photo count caption */
 .photo-count {
     font-family: Calibri, sans-serif;
@@ -130,7 +182,7 @@ body {
     margin-bottom: 16px;
 }
 
-
+/* Marker styles */
 .circular-marker {
     width: 50px;
     height: 50px;
@@ -145,72 +197,38 @@ body {
     border: none !important; 
 }
 
-.photo-wrapper {
-    display: inline-block;
-    margin: 10px;
-    text-align: center;
-}
-
-#photo-container {
-    padding: 16px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px; /* Add spacing between images */
-    justify-content: center;
-}
-.photo-thumbnail {
-    display: block;
-    width: 200px; /* Adjust the size */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 8px; /* rounded corners */
-}
-.photo-caption {
-    font-family: 'Calibri', sans-serif;
-    margin-top: 8px;
-    font-size: 1em;
-    color: #333;
-    line-height: 1.2em;
-    text-align: center;
-}
-
-/* Increase the size of the popup */
+/* Popup styles */
 .leaflet-popup-content-wrapper {
-    width: 300px; /* Adjust width as needed */
+    width: auto; /* Adjust width as needed */
     height: auto; /* Let the height adjust based on the content */
 }
 
-/* Optional: Make the image inside the popup larger */
 .leaflet-popup-content img {
     max-width: 150%;  /* Ensure the image scales properly */
     height: 300px;
     max-height: 400px;  /* You can adjust this to control image size */
 }
 
-/* Optional: Increase padding or margins for better spacing */
 .leaflet-popup-content {
     padding: 7px;  /* Adjust for larger padding inside the popup */
 }
 
-/* Optional: Change the arrow size to match the larger popup */
 .leaflet-popup-tip {
     width: 20px;  /* Increase the size of the popup arrow */
     height: 20px;
 }
 
-/* Flex container for the image and caption */
 .popup-content {
     display: flex;  /* Flexbox layout for side-by-side alignment */
     align-items: center; /* Vertically align items to the center */
 }
 
-/* Style for the image inside the popup */
 .popup-image img {
     width: 100px;  /* Set the image width */
     height: auto;  /* Maintain the aspect ratio */
-    margin-right: 10px;  /* Space between the image and caption */
+    margin-right: 100px;  /* Space between the image and caption */
 }
 
-/* Style for the caption */
 .popup-caption {
     font-size: 12px;  /* Adjust font size as needed */
     line-height: 1.4em;
