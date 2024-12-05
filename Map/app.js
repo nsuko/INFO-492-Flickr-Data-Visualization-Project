@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     map.addLayer(markers);
 
+    
     // Create the container to display photos below the map
     var photoContainer = document.getElementById("photo-container");
     var photoCount = document.getElementById("photo-count");
@@ -123,7 +124,28 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     loadPhotos();
-    map.on('moveend', function() {
+
+    // Adds search ability for places
+    const search = new GeoSearch.GeoSearchControl({
+        provider: new GeoSearch.OpenStreetMapProvider(),
+        position: 'top',
+        style: 'bar',
+        showMarker: false,
+        searchLabel: 'Search for a place...'
+
+    });
+    map.addControl(search);
+
+    // Reload photos when the map is moved or zoomed
+    map.on('moveend', function(event) {
         loadPhotos();
+    });
+
+    map.on('geosearch/showlocation', function(event) {
+        loadPhotos();  // Load photos based on the new location
+    });
+
+    map.on('geosearch/marker/dragend', function(event) {
+        loadPhotos();  // Load photos on drag
     });
 });
