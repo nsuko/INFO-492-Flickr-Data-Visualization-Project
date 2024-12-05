@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     map.addLayer(markers);
 
-    
     // Create the container to display photos below the map
     var photoContainer = document.getElementById("photo-container");
     var photoCount = document.getElementById("photo-count");
@@ -128,6 +127,22 @@ document.addEventListener("DOMContentLoaded", function() {
             photoContainer.appendChild(photoWrapper);
         });
     }
+
+    // Add reset button control
+    const resetButton = L.control({ position: 'topright' });
+
+    resetButton.onAdd = function (map) {
+        const div = L.DomUtil.create('div', 'reset-button');
+        div.innerHTML = 'Reset';
+
+        div.addEventListener('click', function () {
+            map.setView([37, -96], 4);  // Reset the map to the initial view
+        });
+
+        return div;
+    };
+
+    resetButton.addTo(map);
 
     loadPhotos();
 

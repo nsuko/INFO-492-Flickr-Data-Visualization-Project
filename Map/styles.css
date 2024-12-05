@@ -1,4 +1,4 @@
-/* General styles */
+
 body {
     background-color: white;  
     font-family: Calibri, sans-serif;
@@ -131,6 +131,27 @@ body {
     margin: 0 auto;  /* Center the map horizontally */
     height: 800px; /* Set a fixed height for the map */
     border-radius: 8px; /* rounded corners */
+}
+
+/* Reset zoom button styles */
+.reset-button {
+    background-color: #f4f4f4; /* Same background as plus and minus */
+    border: 2px solid #ccc;    /* Same border style */
+    border-radius: 5px;        /* Same rounded corners */
+    padding: 10px 15px;        /* Same padding */
+    font-size: 16px;           /* Same font size */
+    cursor: pointer;          /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+/* Hover effect */
+.reset-button:hover {
+    background-color: #e2e2e2; /* Lighter shade on hover */
+}
+
+/* Active effect (when clicked) */
+.reset-button:active {
+    background-color: #d1d1d1; /* Darker shade when button is pressed */
 }
 
 /* Styling for the photo thumbnails */
@@ -388,3 +409,4 @@ div[id$="-content"] {
     margin-top: 10px;
     display: block; /* Default state: visible */
 }
+
