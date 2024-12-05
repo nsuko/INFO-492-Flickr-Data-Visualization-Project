@@ -1,15 +1,104 @@
 body {
-    background-color: gray;  /* Light grey background */
+    background-color: white;  
     font-family: Calibri, sans-serif;
-    margin: 0;  /* Remove default margin */
-    padding: 0;  /* Remove default padding */
+    margin: 0;  
+    padding: 0;  
 }
+.navbar {
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.flickr {
+    color: #0063dc; 
+    font-weight: bold;
+    font-size: 2.5em; 
+}
+
+.nav {
+    color: #ff0084; 
+    font-weight: bold;
+    font-size: 2.5em; 
+}
+
+.navbar-right {
+    display: flex;
+    gap: 15px; 
+    align-items: center; 
+}
+
+.navbar-right a:hover {
+    color: #0063dc; 
+}
+
+.search-bar {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 1em;
+    width: 200px; 
+    transition: box-shadow 0.3s ease;
+    margin-right: 15px; 
+}
+
+.search-bar:focus {
+    outline: none;
+    border-color: #0063dc; 
+    box-shadow: 0 0 5px rgba(0, 99, 220, 0.5);
+}
+
+/* Intro box styles */
+#intro-box {
+    background-color: white; 
+    border: 1px solid #ccc; 
+    border-radius: 8px; 
+    padding: 20px; 
+    margin: 20px auto; 
+    max-width: 80%; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+#intro-box h2 {
+    font-size: 1.5em;
+    color: #333; 
+    margin-bottom: 10px;
+}
+
+#intro-box p {
+    font-size: 1em;
+    color: #555; 
+    line-height: 1.6;
+}
+
+#intro-box ul {
+    margin-top: 10px;
+    padding-left: 20px; /
+}
+
+#intro-box li {
+    font-size: 1em;
+    color: #444; 
+    margin-bottom: 5px;
+}
+
 /* Set up the overall container as a flexbox layout */
 #map-container {
     display: flex;
-    flex-direction: column; /* Stack map and photo gallery vertically */
-    align-items: center;    /* Center align the map and photo gallery */
-    height: 70vh;          /* Take full height of the viewport */
+    flex-direction: column; 
+    align-items: center;    
+    height: 70vh;          
     width: 100%;
     margin-top: 2%;
     margin-bottom: 2%;
@@ -53,7 +142,7 @@ body {
 
 .custom-div-icon {
     background: transparent !important; /* Ensure no background interferes */
-    border: none !important; /* Remove any borders that might show */
+    border: none !important; 
 }
 
 .photo-wrapper {
