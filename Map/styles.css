@@ -252,3 +252,139 @@ body {
   .leaflet-control-geosearch a.reset:hover {
     background: #f5f5f5;
   }
+
+#legend {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#legend li {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.legend-color {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+    border-radius: 50%; /* Makes the marker circles */
+}
+
+.legend-color.green {
+    background-color: green;
+}
+
+.legend-color.yellow {
+    background-color: gold;
+}
+
+.legend-color.red {
+    background-color: orange;
+}
+
+/* General Toggle Button Styles */
+button.toggle-btn {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    outline: none;
+    color: #555;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+button.toggle-btn:hover {
+    color: #0063dc;
+}
+
+/* Introduction Section */
+#intro-content {
+    margin-top: 10px;
+    display: block; /* Default state: visible */
+}
+#intro-content p {
+    margin: 0;
+}
+
+/* Acknowledgement Section */
+#acknowledgement-content {
+    margin-top: 10px;
+    display: block; /* Default state: visible */
+}
+
+/* Shared Styles for Section Content */
+div[id$="-content"] {
+    margin-top: 10px;
+}
+
+/* General Toggle Button Styles */
+#toggle-intro, #toggle-acknowledgement {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    outline: none;
+    color: #555;
+    transition: transform 0.3s ease;
+}
+
+#toggle-intro:hover, #toggle-acknowledgement:hover {
+    color: #0063dc;
+}
+
+/* Introduction Section */
+#intro-content {
+    margin-top: 10px;
+    display: block; /* Default state: visible */
+}
+
+#intro-content p {
+    margin: 0;
+}
+
+/* Acknowledgement Section */
+#acknowledgement-content {
+    margin-top: 10px;
+    display: block; /* Default state: visible */
+}
+
+/* General Header Styles */
+#acknowledgement-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* General Toggle Button Styles */
+#toggle-intro, #toggle-acknowledgement {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    outline: none;
+    color: #555;
+    transition: transform 0.3s ease;
+}
+
+#toggle-intro:hover, #toggle-acknowledgement:hover {
+    color: #0063dc;
+}
+
+/* Introduction Section */
+#intro-content {
+    margin-top: 10px;
+    display: block; /* Default state: visible */
+}
+
+#intro-content p {
+    margin: 0;
+}
+
+/* Acknowledgement Section */
+#acknowledgement-content {
+    margin-top: 10px;
+    display: block; /* Default state: visible */
+}

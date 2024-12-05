@@ -20,19 +20,25 @@ document.addEventListener("DOMContentLoaded", function() {
     var visiblePhotos = [];  // Array to hold all visible photos
 
     // Collapsible intro box functionality
-    var toggleIntroButton = document.getElementById("toggle-intro");
-    var introContent = document.getElementById("intro-content");
-
-    toggleIntroButton.addEventListener("click", function() {
-        if (introContent.style.display === "none") {
-            introContent.style.display = "block";
-            toggleIntroButton.textContent = "▼";
-        } else {
-            introContent.style.display = "none";
-            toggleIntroButton.textContent = "▲";
-        }
-    });
-
+    function setupToggle(buttonId, contentId) {
+        var toggleButton = document.getElementById(buttonId);
+        var content = document.getElementById(contentId);
+    
+        toggleButton.addEventListener("click", function () {
+            if (content.style.display === "none") {
+                content.style.display = "block";
+                toggleButton.textContent = "▼";
+            } else {
+                content.style.display = "none";
+                toggleButton.textContent = "▲";
+            }
+        });
+    }
+    
+    // Initialize toggles for both sections
+    setupToggle("toggle-intro", "intro-content");
+    setupToggle("toggle-acknowledgement", "acknowledgement-content");
+    
     // Function to load and display photos based on the visible bounds
     function loadPhotos() {
         // Get the current map bounds
