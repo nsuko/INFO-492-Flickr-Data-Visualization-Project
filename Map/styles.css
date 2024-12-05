@@ -69,7 +69,6 @@ body {
 
 #intro-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
 }
 
@@ -79,26 +78,19 @@ body {
     color: #333; 
 }
 
-#intro-content {
-    margin-top: 10px;
+#intro-content li {
+    font-size: 1em;
+    margin-bottom: 5px;
+}
+
+/* Acknowledgement Section */
+#acknowledgement-content {
     display: block; /* Default state: visible */
 }
 
-#intro-content p {
-    font-size: 1em;
-    color: #555; 
-    line-height: 1;
-}
-
-#intro-content ul {
-    margin-top: 10px;
-    padding-left: 20px;
-}
-
-#intro-content li {
-    font-size: 1em;
-    color: #444; 
-    margin-bottom: 5px;
+#acknowledgement-header {
+    display: flex;
+    align-items: center;
 }
 
 /* Map container styles */
@@ -280,25 +272,8 @@ body {
     background-color: orange;
 }
 
-/* General Toggle Button Styles */
-#toggle-intro, #toggle-acknowledgement {
-    background: none;
-    border: none;
-    font-size: 1.5em;
-    cursor: pointer;
-    outline: none;
-    color: #555;
-    transition: transform 0.3s ease;
-}
-
 #toggle-intro:hover, #toggle-acknowledgement:hover {
     color: #0063dc;
-}
-
-#acknowledgement-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 /* General Toggle Button Styles */
@@ -310,24 +285,4 @@ body {
     outline: none;
     color: #555;
     transition: transform 0.3s ease;
-}
-
-#toggle-intro:hover, #toggle-acknowledgement:hover {
-    color: #0063dc;
-}
-
-/* Introduction Section */
-#intro-content {
-    margin-top: 10px;
-    display: block; /* Default state: visible */
-}
-
-#intro-content p {
-    margin: 0;
-}
-
-/* Acknowledgement Section */
-#acknowledgement-content {
-    margin-top: 10px;
-    display: block; /* Default state: visible */
 }
