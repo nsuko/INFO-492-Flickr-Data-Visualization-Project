@@ -1,102 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flickr Map</title>
-    <!-- Add these CSS files -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"/>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="navbar-left">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Flickr Map</title>
+      <!-- Add these CSS files -->
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+      <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"/>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+      <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+      <link rel="stylesheet" href="styles.css">
+   </head>
+   <body>
+      <nav class="navbar">
+         <div class="navbar-left">
             <span class="flickr">Flickr</span><span class="nav">Nav</span>
-        </div>
-        <div class="navbar-right">
+         </div>
+         <div class="navbar-right">
             <a href="https://www.flickr.com" target="_blank">Home</a>
             <a href="https://www.flickr.com/commons" target="_blank">Commons</a>
             <a href="https://www.flickr.com/explore" target="_blank">Explore</a>
-        </div>
-    </nav>
-
-    <!-- Introduction Section -->
-    <div id="intro-box">
-        <div id="intro-header">
-            <h2>Guide</h2>
+         </div>
+      </nav>
+      <!-- New Introduction Section Above Current Intro -->
+      <div id="intro-box">
+         <div id="intro-header">
+            <h2>Welcome to the Flickr Map</h2>
             <button id="toggle-intro">▼</button>
-        </div>
-        <div id="intro-content">
+         </div>
+         <div id="intro-content">
             <p>
-            Explore a visual map of photographs shared on Flickr. Use the map below to 
-            interact with clusters, discover individual photos, and uncover trends in photography 
-            worldwide. 
-        <p>
-            Follow the instructions for the best experience:
-        </p>
-        <ul>
-            <li>Zoom in to explore photo clusters at a more granular level. Zoom out to see photo clusters over wider-ranging areas.</li>
-            <li>Click on photo clusters to reveal individual photos represented by the cluster.</li>
-            <li>Click on photos to view additional details or full-screen images.</li>
-        </ul>
-        <b>Cluster Marker Color Legend</b>
-        <ul class="legend-list">
-            <p><span class="legend-color green"></span> Green: 1-9 photos</p>
-            <p><span class="legend-color yellow"></span> Yellow: 10-99 photos</p>
-            <p><span class="legend-color red"></span> Orange: 100+ photos</p>
-        </ul>
-    </div>
-
-    <!-- Acknowledgement Section -->
-    <div id="acknowledgement-section">
-        <div id="acknowledgement-header">
-            <h3>Acknowledging Indigenous Histories and Contributions</h3>
-            <button id="toggle-acknowledgement">▼</button>
-        </div>
-        <div id="acknowledgement-content" style="display: none;">
+               Explore a visual map of photographs shared on Flickr. Use the map below to 
+               interact with clusters, discover individual photos, and uncover trends in photography 
+               worldwide. 
             <p>
-                The geotagged historical photographs presented in this project often depict locations 
-                with rich and complex histories that predate colonial narratives. We recognize that many of these places 
-                are situated on lands stewarded by Indigenous peoples for thousands of years. These lands hold cultural, 
-                spiritual, and historical significance that may not be fully visible in the colonial-era photographs featured 
-                in the Flickr Commons archive.
-            </p>
-            <p>
-                To honor these histories and perspectives, we propose the following steps for the next stage of the project:
+               Here are some tips to get you started:
             </p>
             <ul>
-                <li>
-                    <strong>Including Land Acknowledgments:</strong> Where possible, we will integrate land acknowledgments 
-                    into the interface, recognizing the Indigenous peoples whose lands are represented in the photographs.
-                </li>
-                <li>
-                    <strong>Highlighting Indigenous Narratives:</strong> We will explore opportunities to include metadata 
-                    or supplementary information that provides Indigenous context to the photos or regions displayed.
-                </li>
-                <li>
-                    <strong>Diversifying the Archive’s Representation:</strong> While the archive may reflect a colonial 
-                    bias, we aim to collaborate with Indigenous communities and organizations to elevate underrepresented voices 
-                    and integrate diverse perspectives into the project.
-                </li>
+               <li>Zoom in to explore photo clusters at a more granular level. Zoom out to see photo clusters over wider-ranging areas.</li>
+               <li>Click on photo clusters to reveal individual photos represented by the cluster.</li>
+               <li>Click on photos to view additional details or full-screen images.</li>
             </ul>
-        </div>
-    </div>
-
-    <div id="map-container">
-        <div id="map"></div>
-    </div>
-    
-    <div id="photo-count" class="photo-count"></div>
-    <div id="photo-container"></div>
-        
-
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet-geosearch@latest/dist/bundle.min.js"></script>
-    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
-    <script src="https://d3js.org/d3.v6.min.js"></script>
-    <script src="app.js"></script>
-</body>
+            <b>Cluster Marker Color Legend</b>
+            <ul class="legend-list">
+               <p><span class="legend-color green"></span> Green: 1-9 photos</p>
+               <p><span class="legend-color yellow"></span> Yellow: 10-99 photos</p>
+               <p><span class="legend-color red"></span> Orange: 100+ photos</p>
+            </ul>
+         </div>
+         <!-- Acknowledgement Section -->
+         <div id="acknowledgement-section">
+            <div id="acknowledgement-header">
+               <h3>Acknowledging Indigenous Histories and Contributions</h3>
+               <button id="toggle-acknowledgement">▼</button>
+            </div>
+            <div id="acknowledgement-content" style="display: none;">
+               <p>
+                  The geotagged historical photographs presented in this project often depict locations 
+                  with rich and complex histories that predate colonial narratives. We recognize that many of these places 
+                  are situated on lands stewarded by Indigenous peoples for thousands of years. These lands hold cultural, 
+                  spiritual, and historical significance that may not be fully visible in the colonial-era photographs featured 
+                  in the Flickr Commons archive.
+               </p>
+               <p>
+                  To honor these histories and perspectives, we propose the following steps for the next stage of the project:
+               </p>
+               <ul>
+                  <li>
+                     <strong>Including Land Acknowledgments:</strong> Where possible, we will integrate land acknowledgments 
+                     into the interface, recognizing the Indigenous peoples whose lands are represented in the photographs.
+                  </li>
+                  <li>
+                     <strong>Highlighting Indigenous Narratives:</strong> We will explore opportunities to include metadata 
+                     or supplementary information that provides Indigenous context to the photos or regions displayed.
+                  </li>
+                  <li>
+                     <strong>Diversifying the Archive’s Representation:</strong> While the archive may reflect a colonial 
+                     bias, we aim to collaborate with Indigenous communities and organizations to elevate underrepresented voices 
+                     and integrate diverse perspectives into the project.
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div id="map-container">
+         <div id="map"></div>
+      </div>
+      <div id="photo-count" class="photo-count"></div>
+      <div id="photo-container"></div>
+      <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+      <script src="https://unpkg.com/leaflet-geosearch@latest/dist/bundle.min.js"></script>
+      <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+      <script src="https://d3js.org/d3.v6.min.js"></script>
+      <script src="app.js"></script>
+   </body>
 </html>

@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    var map = L.map('map').setView([37, -96], 4);  // Centered on the US, zoom level 4
+    var map = L.map('map').setView([37, -96], 4); // Centered on the US, zoom level 4
 
     // Add tile layer (OpenStreetMap)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -12,18 +12,19 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     map.addLayer(markers);
 
+
     // Create the container to display photos below the map
     var photoContainer = document.getElementById("photo-container");
     var photoCount = document.getElementById("photo-count");
 
-    var visiblePhotos = [];  // Array to hold all visible photos
+    var visiblePhotos = []; // Array to hold all visible photos
 
     // Collapsible intro box functionality
     function setupToggle(buttonId, contentId) {
         var toggleButton = document.getElementById(buttonId);
         var content = document.getElementById(contentId);
-    
-        toggleButton.addEventListener("click", function () {
+
+        toggleButton.addEventListener("click", function() {
             if (content.style.display === "none") {
                 content.style.display = "block";
                 toggleButton.textContent = "▼";
@@ -33,11 +34,11 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
-    
+
     // Initialize toggles for both sections
     setupToggle("toggle-intro", "intro-content");
     setupToggle("toggle-acknowledgement", "acknowledgement-content");
-    
+
     // Function to load and display photos based on the visible bounds
     function loadPhotos() {
         // Get the current map bounds
@@ -47,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
         markers.clearLayers();
 
         d3.csv("flickr_photos_metadata_yearly.csv").then(function(data) {
-            visiblePhotos = [];  // Clear previous photos
+            visiblePhotos = []; // Clear previous photos
 
             // Loop through each photo in the data
             data.forEach(function(photo) {
@@ -64,7 +65,9 @@ document.addEventListener("DOMContentLoaded", function() {
                         iconAnchor: [25, 25]
                     });
 
-                    var marker = L.marker([lat, lon], { icon: icon });
+                    var marker = L.marker([lat, lon], {
+                        icon: icon
+                    });
 
                     const popupContent = `
                     <div class="popup-content">
@@ -77,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             <a href="https://www.flickr.com/photos/${photo.owner}/${photo.id}/in/commons" target="_blank">Original Page</a>
                         </div>
                     </div>`;
-                
+
                     marker.bindPopup(popupContent, {
                         maxWidth: 400,
                         maxHeight: 600,
@@ -163,10 +166,10 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     map.on('geosearch/showlocation', function(event) {
-        loadPhotos();  // Load photos based on the new location
+        loadPhotos(); // Load photos based on the new location
     });
 
     map.on('geosearch/marker/dragend', function(event) {
-        loadPhotos();  // Load photos on drag
+        loadPhotos(); // Load photos on drag
     });
 });
