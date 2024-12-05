@@ -203,7 +203,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const search = new GeoSearch.GeoSearchControl({
         provider: new GeoSearch.OpenStreetMapProvider(),
         position: 'top',
-            style: 'bar',
+        style: 'bar',
+        showMarker: false,
+        searchLabel: 'Search for a place...'
+
     });
     map.addControl(search);
 
