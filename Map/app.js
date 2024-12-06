@@ -202,10 +202,10 @@ document.addEventListener("DOMContentLoaded", function() {
     // Adds search ability for places
     const search = new GeoSearch.GeoSearchControl({
         provider: new GeoSearch.OpenStreetMapProvider(),
-        position: 'top',
-        style: 'bar',
+        style: 'button',
+        position: 'topleft',
         showMarker: false,
-        searchLabel: 'Search for a place...'
+        searchLabel: 'Search for a place...',
 
     });
     map.addControl(search);
