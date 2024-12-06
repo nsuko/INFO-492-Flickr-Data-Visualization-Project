@@ -15,13 +15,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 content.style.display = "block";
 
-                toggleButton.textContent = "▼";
+                toggleButton.textContent = "-";
 
             } else {
 
                 content.style.display = "none";
 
-                toggleButton.textContent = "▲";
+                toggleButton.textContent = "+";
 
             }
 
