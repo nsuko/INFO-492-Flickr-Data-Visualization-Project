@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", function() {
     bounds = L.latLngBounds(southWest, northEast);
 
     var map = L.map('map', {
-        maxBounds: bounds,
+        worldCopyJump: true,
+        minZoom: 2
     }).setView([37, -96], 4); // Centered on the US, zoom level 4
 
     // Add tile layer (OpenStreetMap)

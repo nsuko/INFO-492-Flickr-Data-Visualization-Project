@@ -232,3 +232,39 @@ body {
     font-size: 12px;  /* Adjust font size as needed */
     line-height: 1.4em;
 }
+
+
+.legend-color {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+    border-radius: 50%; /* Makes the marker circles */
+}
+
+.legend-color.green {
+    background-color: green;
+}
+
+.legend-color.yellow {
+    background-color: gold;
+}
+
+.legend-color.red {
+    background-color: orange;
+}
+
+#toggle-intro:hover, #toggle-acknowledgement:hover {
+    color: #0063dc;
+}
+
+/* General Toggle Button Styles */
+#toggle-intro, #toggle-acknowledgement {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    outline: none;
+    color: #555;
+    transition: transform 0.3s ease;
+}
