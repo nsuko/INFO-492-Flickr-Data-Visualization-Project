@@ -35,10 +35,10 @@ document.addEventListener("DOMContentLoaded", function() {
         toggleButton.addEventListener("click", function() {
             if (content.style.display === "none") {
                 content.style.display = "block";
-                toggleButton.textContent = "▼";
+                toggleButton.textContent = "-";
             } else {
                 content.style.display = "none";
-                toggleButton.textContent = "▲";
+                toggleButton.textContent = "+";
             }
         });
     }
