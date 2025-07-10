@@ -2,11 +2,9 @@
 
 **FlickrNav** is a web-based data visualization app that displays geotagged photos from the Flickr API on an interactive map. Built with Leaflet.js, D3.js, and vanilla JavaScript, the app allows users to explore photos by location, view thumbnails, and navigate to the original Flickr pages — all in a smooth, user-friendly interface.
 
-This project was created as part of an academic course at the University of Washington (INFO 340).
-
 ## Technologies Used
 
-- JavaScript (ES6)
+- JavaScript
 - HTML / CSS
 - D3.js for loading and parsing CSV metadata
 - Leaflet.js for mapping and marker clusters
