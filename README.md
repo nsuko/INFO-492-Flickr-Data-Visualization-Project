@@ -4,8 +4,6 @@
 
 This project was created as part of an academic course at the University of Washington (INFO 340).
 
----
-
 ## Technologies Used
 
 - JavaScript (ES6)
@@ -14,8 +12,6 @@ This project was created as part of an academic course at the University of Wash
 - Leaflet.js for mapping and marker clusters
 - GeoSearch for place search and navigation
 - Flickr API (via CSV dataset)
-
----
 
 ## Key Features
 
@@ -27,16 +23,12 @@ This project was created as part of an academic course at the University of Wash
 - Custom popups with photo previews, titles, owner names, and direct links to original pages
 - Live photo counter showing the number of visible photos
 
----
-
 ## My Contributions
 
 - Designed the layout and interactions for the UI
 - Implemented the map logic with Leaflet, clustering, and search
 - Built the logic for dynamic loading of visible photos
 - Developed lazy loading for thumbnails and reset/map control behavior
-
----
 
 ## Data
 
@@ -47,8 +39,6 @@ This app uses a dataset of geotagged photo metadata exported from Flickr, stored
 - Photo URL
 - UNIX Upload Date
 
----
-
 ## How to Run It
 
 1. Clone or download the project repository
@@ -57,8 +47,6 @@ This app uses a dataset of geotagged photo metadata exported from Flickr, stored
 
 Note: Due to browser security, local file access for CSV might not work unless served via a local server (e.g., Python’s `http.server`, Live Server in VS Code, etc.).
 
----
-
 ## Credits
 
 - Built by a student team at the University of Washington
@@ -66,4 +54,3 @@ Note: Due to browser security, local file access for CSV might not work unless s
 - Place search via GeoSearch and OpenStreetMap
 - Data sourced from Flickr
 
----
